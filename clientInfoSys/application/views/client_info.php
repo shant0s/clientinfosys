@@ -47,7 +47,7 @@
                 <td><?php echo form_error('nationality'); ?></td>
                 <tr>
                     <td>Date of Birth: </td>
-                    <td><input type="date" id="dob"></td>
+                    <td><input type="date" name="dob" id="dob"></td>
                     <td><div id="date_birth"></div></td>
                 </tr>
                 <td><?php echo form_error('date'); ?></td>

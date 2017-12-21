@@ -28,14 +28,14 @@ class Client extends MY_Controller {
 //        print_r($data);
 //        exit;
         
-        $filename = "client_info.csv";
+        $filename = "client_info".date('dmy_h:i:s').".csv";
         
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment;filename='.$filename);
+        header('Content-Disposition: attachement;filename='.$filename);
         
         $file = fopen('php://output', 'w');
         
-        $client_record[] = ['Fullname', 'Gender', 'Contact_type', 'Contact', 'Address', 'Nationality', 'Education'];
+        $client_record[] = ['Fullname', 'Gender', 'Contact-Type', 'Phone/Email', 'Address', 'Nationality', 'Date of Birth', 'Education'];
         
         $client_record[] = $data;
         
@@ -44,6 +44,7 @@ class Client extends MY_Controller {
         }
         
         fclose($file);
+        
         
     }
 
