@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Client Information System</title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css'); ?>" />
-        <script type="text/javascript" src="<?php echo base_url('assets/js/clientInfo.js'); ?>"></script>
-    </head>
-    <body>
+<?php include_once 'header.php'; ?>
         <div class="container">
             <legend><h2>Client Information</h2></legend>
             <?php echo form_open('client/client_info', ['onsubmit' => 'return checkField(event);']); ?>
@@ -63,5 +56,4 @@
             </table>
             <?php echo form_close(); ?>
         </div>
-    </body>
-</html>
+<?php include_once 'footer.php'; ?>

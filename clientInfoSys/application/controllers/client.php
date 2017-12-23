@@ -7,7 +7,7 @@ class Client extends MY_Controller {
 
         $this->load->helper(array('url', 'form'));
 
-        $this->load->library('form_validation');
+        $this->load->library(array('form_validation', 'CSVReader'));
     }
 
     public function index() {
@@ -23,29 +23,33 @@ class Client extends MY_Controller {
     public function client_info() {
         $data = $this->input->post();
         unset($data['submit']);
-        
-//        echo "<pre>";
-//        print_r($data);
-//        exit;
-        
-        $filename = "client_info".date('dmy_h:i:s').".csv";
-        
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachement;filename='.$filename);
-        
-        $file = fopen('php://output', 'w');
-        
-        $client_record[] = ['Fullname', 'Gender', 'Contact-Type', 'Phone/Email', 'Address', 'Nationality', 'Date of Birth', 'Education'];
-        
+
+        $filename = "client_info" . date('dmY_h_i_s') . ".csv";
+
+        $file_handler = fopen('./uploads/' . $filename, 'w');
+
+        $client_record[] = ['Name', 'Gender', 'Contact_type', 'Phone/Email', 'Address', 'Nationality', 'DOB', 'Education'];
         $client_record[] = $data;
-        
-        foreach($client_record as $key => $value){
-            fputcsv($file, $value);
+
+        foreach ($client_record as $key => $value) {
+            fputcsv($file_handler, $value);
         }
-        
-        fclose($file);
-        
-        
+
+        fclose($file_handler);
+
+        return redirect('client/view_info');
+    }
+
+    public function view_info() {
+        $fileList = scandir('./uploads/');
+
+        $clientData = [];
+        foreach ($fileList as $filename) {
+            if (!in_array($filename, ['.', '..'])) {
+                array_push($clientData, $this->csvreader->parse_file('./uploads/' . $filename));
+            }
+        }
+        $this->load->view('view_info', ["clientData" => $clientData]);
     }
 
 }

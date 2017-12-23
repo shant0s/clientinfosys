@@ -8,3 +8,17 @@ legend{
     border-bottom: 1px solid #000;
     margin-bottom: 20px;
 }
+
+.message{
+    color: #009926;
+    font-size: 250%;
+}
+
+table{
+    background: #b3b3b3;
+}
+
+.table{
+    background: #b3b3b3;
+    width: 940px;
+}
